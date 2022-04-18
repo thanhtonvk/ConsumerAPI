@@ -20,18 +20,24 @@ import retrofit2.http.Query;
 public interface SinhVienAPI {
     Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
     SinhVienAPI api = new Retrofit.Builder()
-            .baseUrl("https://thapi.conveyor.cloud/")
+            .baseUrl("https://finaltest-nv7.conveyor.cloud/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(SinhVienAPI.class);
-    @GET("api/SinhViens?tukhoa={tukhoa}")
-    Call<List<SinhVien>>getDSSinhVienPath(@Path("tukhoa") String tukhoa);
-    @GET("api/SinhViens")
-    Call<List<SinhVien>>getDSSinhVienQuery(@Query("tukhoa") String tukhoa);
-    @POST("api/SinhViens")
-    Call<Integer>addSinhVien(@Body SinhVien sinhVien);
-    @PUT("api/SinhViens")
-    Call<Integer>updateSinhVien(@Query("id") int id,@Body  SinhVien sinhVien);
-    @DELETE("api/SinhViens")
-    Call<Integer>deleteSinhVien(@Query("id") int id);
+
+    @GET("api/Students/GetStudents")
+    Call<List<SinhVien>> getDSSinhVienPath();
+
+    @GET("api/Students/GetStudent")
+    Call<SinhVien> getSVByID(String id);
+
+    @POST("api/Students/PostStudent")
+    Call<Void> addSinhVien(@Body SinhVien sinhVien);
+
+    @PUT("api/Students/PutStudent")
+    Call<Void> updateSinhVien(@Query("id") String id, @Body SinhVien sinhVien);
+
+    @DELETE("api/Students/DeleteStudent")
+    Call<Void> DeleteStudent(@Query("id") String id);
+
 }

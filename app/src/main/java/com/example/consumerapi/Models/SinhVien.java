@@ -1,69 +1,57 @@
 package com.example.consumerapi.Models;
 
 public class SinhVien {
-    private int ID;
-    private String HoTen;
-    private String DiaChi;
-    private String Lop;
-    private String NgaySinh;
+    private String StudentID;
+    private String ClassID;
+    private String FullName;
+    private boolean Gender;
 
-    public SinhVien(int ID, String hoTen, String diaChi, String lop, String ngaySinh) {
-        this.ID = ID;
-        HoTen = hoTen;
-        DiaChi = diaChi;
-        Lop = lop;
-        NgaySinh = ngaySinh;
+    public SinhVien(String studentID, String classID, String fullName, boolean gender) {
+        StudentID = studentID;
+        ClassID = classID;
+        FullName = fullName;
+        Gender = gender;
     }
 
-    public SinhVien(String hoTen, String diaChi, String lop, String ngaySinh) {
-        HoTen = hoTen;
-        DiaChi = diaChi;
-        Lop = lop;
-        NgaySinh = ngaySinh;
+    public String getStudentID() {
+        return StudentID;
     }
 
-    public int getID() {
-        return ID;
+    public void setStudentID(String studentID) {
+        StudentID = studentID;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public String getClassID() {
+        return ClassID;
     }
 
-    public String getHoTen() {
-        return HoTen;
+    public void setClassID(String classID) {
+        ClassID = classID;
     }
 
-    public void setHoTen(String hoTen) {
-        HoTen = hoTen;
+    public String getFullName() {
+        return FullName;
     }
 
-    public String getDiaChi() {
-        return DiaChi;
+    public void setFullName(String fullName) {
+        FullName = fullName;
     }
 
-    public void setDiaChi(String diaChi) {
-        DiaChi = diaChi;
+    public boolean isGender() {
+        return Gender;
     }
 
-    public String getLop() {
-        return Lop;
-    }
-
-    public void setLop(String lop) {
-        Lop = lop;
-    }
-
-    public String getNgaySinh() {
-        return NgaySinh;
-    }
-
-    public void setNgaySinh(String ngaySinh) {
-        NgaySinh = ngaySinh;
+    public void setGender(boolean gender) {
+        Gender = gender;
     }
 
     @Override
     public String toString() {
-        return "Họ tên: " + HoTen + "\nNgày sinh: " + NgaySinh + "\nĐịa chỉ:" + DiaChi;
+        if (Gender) {
+            return "Mã sinh viên" + StudentID + "\nHọ tên: " + FullName + "\nMã lớp: " + ClassID + "\nGiới tính:" + "Nam";
+        } else {
+            return "Mã sinh viên" + StudentID + "\nHọ tên: " + FullName + "\nMã lớp: " + ClassID + "\nGiới tính:" + "Nữ";
+        }
+
     }
 }
