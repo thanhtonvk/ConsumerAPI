@@ -47,11 +47,9 @@ public class SinhVien {
 
     @Override
     public String toString() {
-        if (Gender) {
-            return "Mã sinh viên" + StudentID + "\nHọ tên: " + FullName + "\nMã lớp: " + ClassID + "\nGiới tính:" + "Nam";
-        } else {
-            return "Mã sinh viên" + StudentID + "\nHọ tên: " + FullName + "\nMã lớp: " + ClassID + "\nGiới tính:" + "Nữ";
-        }
+
+        return "Mã sinh viên" + StudentID + "\nHọ tên: " + FullName;
+
 
     }
 }

@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00BCD4"
+        android:background="#2196F3"
         android:gravity="center"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -25,12 +25,14 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:text="Mã sinh viên: " />
 
             <TextView
+                android:textSize="20sp"
                 android:id="@+id/tv_masv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -50,12 +52,14 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:text="Họ tên: " />
 
             <TextView
+                android:textSize="20sp"
                 android:id="@+id/tv_hoten"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -75,12 +79,14 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:text="Lớp: " />
 
             <TextView
+                android:textSize="20sp"
                 android:id="@+id/tv_lop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -100,12 +106,14 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:text="Giới tính: " />
 
             <TextView
+                android:textSize="20sp"
                 android:id="@+id/tv_gioitinh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
