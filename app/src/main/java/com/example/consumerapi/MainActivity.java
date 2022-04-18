@@ -57,14 +57,23 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean checkExist(String masv) {
         final boolean[] check = {true};
-        for (SinhVien sinhVien:sinhVienList
-             ) {
-            if(sinhVien.getStudentID().equals(masv)){
-                check[0]= false;
+        SinhVienAPI.api.getSVByID(masv).enqueue(new Callback<SinhVien>() {
+            @Override
+            public void onResponse(Call<SinhVien> call, Response<SinhVien> response) {
+                if (response.body() != null) {
+                    check[0] = false;
+                }
             }
-        }
+
+            @Override
+            public void onFailure(Call<SinhVien> call, Throwable t) {
+
+            }
+        });
         return check[0];
     }
+
+
 
     private void onClick() {
         findViewById(R.id.btn_timkiem).setOnClickListener(new View.OnClickListener() {
@@ -85,15 +94,15 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     check = false;
                 }
-                if (checkExist(masv)) {
-                    if (hoten.equals("") || lop.equals("")) {
+                if (checkExist1(masv)) {
+                    if (hoten.equals("") || lop.equals("") || masv.equals("")) {
                         Toast.makeText(getApplicationContext(), "Các trường không được đẻ trống", Toast.LENGTH_LONG).show();
                     } else {
                         SinhVien sv = new SinhVien(masv, lop, hoten, check);
                         SinhVienAPI.api.addSinhVien(sv).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                if (response.isSuccessful()) {
+                                if (response.body() != null) {
                                     Toast.makeText(getApplicationContext(), "Thành công", Toast.LENGTH_LONG).show();
                                     loadData("");
                                 }
@@ -101,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<Void> call, Throwable t) {
-                                Log.e("TAG",t.getMessage());
+                                Log.e("Check", t.getMessage());
                             }
                         });
                     }
@@ -127,14 +136,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-     lv_sinhvien.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-         @Override
-         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-             sinhVien = sinhVienList.get(i);
-             dialogThongTinSV();
-             return false;
-         }
-     });
+        lv_sinhvien.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                sinhVien = sinhVienList.get(i);
+                dialogThongTinSV();
+                return true;
+            }
+        });
         findViewById(R.id.btn_capnhat).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         check = false;
                     }
-                    if (!checkExist(masv)) {
+                    if (!checkExist1(masv)) {
                         if (hoten.equals("") || lop.equals("")) {
                             Toast.makeText(getApplicationContext(), "Các trường không được đẻ trống", Toast.LENGTH_LONG).show();
                         } else {
@@ -164,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(Call<Void> call, Throwable t) {
-                                    Log.e("TAG",t.getMessage());
+                                    Log.e("Check", t.getMessage());
                                 }
                             });
                         }
@@ -202,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Log.e("TAG",t.getMessage());
+                        Log.e("Check", t.getMessage());
                     }
                 });
             }
@@ -244,24 +253,33 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void dialogThongTinSV(){
+    private void dialogThongTinSV() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_thongtin);
         TextView tv_ten = dialog.findViewById(R.id.tv_hoten);
         TextView tv_lop = dialog.findViewById(R.id.tv_lop);
         TextView tv_masv = dialog.findViewById(R.id.tv_masv);
         TextView tv_gioitinh = dialog.findViewById(R.id.tv_gioitinh);
-        if(sinhVien!=null){
+        checkExist("1");
+        if (sinhVien != null) {
             tv_ten.setText(sinhVien.getFullName());
             tv_lop.setText(sinhVien.getClassID());
             tv_masv.setText(sinhVien.getStudentID());
-            if(sinhVien.isGender()){
+            if (sinhVien.isGender()) {
                 tv_gioitinh.setText("Nam");
-            }else{
+            } else {
                 tv_gioitinh.setText("Nữ");
             }
         }
         dialog.show();
+    }
+    private boolean checkExist1(String masv) {
+        final boolean[] check = {true};
+        for (SinhVien sv : sinhVienList
+        ) {
+            if (sv.getStudentID().equals(masv)) check[0] = false;
+        }
+        return check[0];
     }
 
 }

@@ -28,11 +28,11 @@ public interface SinhVienAPI {
     @GET("api/Students/GetStudents")
     Call<List<SinhVien>> getDSSinhVienPath();
 
-    @GET("api/Students/GetStudent")
-    Call<SinhVien> getSVByID(String id);
+    @GET("api/Students/GetStudent/{id}")
+    Call<SinhVien> getSVByID(@Path("id") String id);
 
     @POST("api/Students/PostStudent")
-    Call<Void> addSinhVien(@Body SinhVien sinhVien);
+    Call<Void> addSinhVien(@Body SinhVien student);
 
     @PUT("api/Students/PutStudent")
     Call<Void> updateSinhVien(@Query("id") String id, @Body SinhVien sinhVien);
